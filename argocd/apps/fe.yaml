@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: web
+  name: fe
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/donan2k5/argocd-demo
     targetRevision: main
-    path: web
+    path: fe
   destination:
     server: https://kubernetes.default.svc
-    namespace: web
+    namespace: fe
   syncPolicy:
     automated:
       prune: true
