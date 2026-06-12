@@ -21,7 +21,7 @@ spec:
           for: 1m
           labels:
             severity: critical
-            namespace: monitoring
+            namespace: be
           annotations:
             summary: "BE success rate below SLO"
             description: "Success rate is {{ $value | humanizePercentage }}, below 95% SLO"

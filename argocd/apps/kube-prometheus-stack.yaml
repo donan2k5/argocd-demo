@@ -16,6 +16,10 @@ spec:
             serviceMonitorSelectorNilUsesHelmValues: false
         grafana:
           adminPassword: admin
+        alertmanager:
+          alertmanagerSpec:
+            alertmanagerConfigSelector: {}
+            alertmanagerConfigNamespaceSelector: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

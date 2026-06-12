@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
   name: be-alert-email
-  namespace: monitoring
+  namespace: be
   labels:
     alertmanagerConfig: be
 spec:
