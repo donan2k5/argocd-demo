@@ -14,10 +14,10 @@ spec:
   receivers:
     - name: email
       emailConfigs:
-        - to: tuphucnguyen200512@gmail.com
+        - to: tuphucnguyen20051@gmail.com
           from: alertmanager-demo@gmail.com
           smarthost: smtp.gmail.com:587
-          authUsername: tuphucnguyen200512@gmail.com
+          authUsername: tuphucnguyen20051@gmail.com
           authPassword:
             name: alertmanager-email-secret
             key: password
