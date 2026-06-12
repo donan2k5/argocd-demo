@@ -4,3 +4,4 @@ fe-app/.env
 be-app/__pycache__/
 be-app/*.pyc
 be-app/.env
+k8s-be/email-secret.yaml

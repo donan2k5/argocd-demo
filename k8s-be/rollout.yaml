@@ -31,12 +31,17 @@ spec:
               port: 8000
   strategy:
     canary:
+      analysis:
+        templates:
+          - templateName: success-rate
+        startingStep: 1
       steps:
         - setWeight: 25
-        - pause: {}
+        - pause:
+            duration: 2m
         - setWeight: 50
         - pause:
-            duration: 30s
+            duration: 2m
         - setWeight: 100
 ---
 apiVersion: v1

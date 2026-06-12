@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: be-slo
+  namespace: be
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: be.slo
+      interval: 30s
+      rules:
+        - record: be:success_rate:rate2m
+          expr: |
+            sum(rate(http_requests_total{namespace="be",status!~"5.."}[2m]))
+            /
+            sum(rate(http_requests_total{namespace="be"}[2m]))
+
+        - alert: BeHighErrorRate
+          expr: be:success_rate:rate2m < 0.95
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "BE success rate below SLO"
+            description: "Success rate is {{ $value | humanizePercentage }}, below 95% SLO"
