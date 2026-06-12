@@ -13,6 +13,6 @@ spec:
         prometheus:
           address: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
           query: |
-            sum(rate(http_requests_total{namespace="be",status!~"5.."}[2m]))
+            sum(rate(http_requests_total{namespace="be",handler="/",status!~"5.."}[2m]))
             /
-            sum(rate(http_requests_total{namespace="be"}[2m]))
+            sum(rate(http_requests_total{namespace="be",handler="/"}[2m]))

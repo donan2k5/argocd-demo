@@ -12,9 +12,9 @@ spec:
       rules:
         - record: be:success_rate:rate2m
           expr: |
-            sum(rate(http_requests_total{namespace="be",status!~"5.."}[2m]))
+            sum(rate(http_requests_total{namespace="be",handler="/",status!~"5.."}[2m]))
             /
-            sum(rate(http_requests_total{namespace="be"}[2m]))
+            sum(rate(http_requests_total{namespace="be",handler="/"}[2m]))
 
         - alert: BeHighErrorRate
           expr: be:success_rate:rate2m < 0.95
