@@ -20,6 +20,3 @@ spec:
           image: tuphucnguyen20051/fe-demo:latest
           ports:
             - containerPort: 80
-          env:
-            - name: VITE_BE_URL
-              value: "http://be-svc.be.svc.cluster.local:8000"
