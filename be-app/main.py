@@ -1,7 +1,13 @@
+import os, random
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from typing import List
 from pydantic import BaseModel
+from prometheus_fastapi_instrumentator import Instrumentator
+
+ERROR_RATE = float(os.getenv("ERROR_RATE", "0"))
+VERSION = os.getenv("VERSION", "v1")
 
 app = FastAPI(title="Da Nang Places API")
 
@@ -12,6 +18,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+Instrumentator().instrument(app).expose(app)
+
 
 class Place(BaseModel):
     id: int
@@ -21,7 +29,6 @@ class Place(BaseModel):
     image_url: str
 
 
-# Fake repository
 PLACES: List[Place] = [
     Place(
         id=1,
@@ -112,7 +119,14 @@ PLACES: List[Place] = [
 
 @app.get("/")
 def root():
-    return {"message": "Da Nang Places API is running"}
+    if random.random() < ERROR_RATE:
+        return JSONResponse(status_code=500, content={"error": "injected", "version": VERSION})
+    return {"message": "Da Nang Places API is running", "version": VERSION}
+
+
+@app.get("/healthz")
+def healthz():
+    return "ok"
 
 
 @app.get("/places", response_model=List[Place])
