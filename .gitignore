@@ -1,0 +1,6 @@
+node_modules/
+fe-app/dist/
+fe-app/.env
+be-app/__pycache__/
+be-app/*.pyc
+be-app/.env
