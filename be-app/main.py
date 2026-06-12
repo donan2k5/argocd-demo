@@ -29,7 +29,6 @@ class Place(BaseModel):
     image_url: str
 
 
-# Fake repository
 PLACES: List[Place] = [
     Place(
         id=1,

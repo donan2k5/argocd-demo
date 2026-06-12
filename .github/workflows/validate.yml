@@ -2,8 +2,8 @@ name: validate
 on:
   pull_request:
     paths:
-      - "web/**"
-      - "api/**"
+      - "fe/**"
+      - "be/**"
       - "argocd/**"
 
 jobs:
@@ -17,8 +17,8 @@ jobs:
           curl -sSLo kc.tgz https://github.com/yannh/kubeconform/releases/download/v0.6.7/kubeconform-linux-amd64.tar.gz
           tar -xzf kc.tgz && sudo mv kubeconform /usr/local/bin/
 
-      - name: Validate web manifests
-        run: kubeconform -strict -summary web/
+      - name: Validate fe manifests
+        run: kubeconform -strict -summary fe/
 
-      - name: Validate api manifests
-        run: kubeconform -strict -summary api/
+      - name: Validate be manifests
+        run: kubeconform -strict -summary be/

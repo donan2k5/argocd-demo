@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-demo
-  namespace: web
+  name: fe-svc
+  namespace: fe
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   selector:
-    app: nginx-demo
+    app: fe
   ports:
     - port: 80
       targetPort: 80
-  type: ClusterIP
+  type: NodePort

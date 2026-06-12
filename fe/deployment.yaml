@@ -1,20 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-demo
-  namespace: default
+  name: fe
+  namespace: fe
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: api-demo
+      app: fe
   template:
     metadata:
       labels:
-        app: api-demo
+        app: fe
     spec:
       containers:
-        - name: api
-          image: httpd:2.4
+        - name: fe
+          image: tuphucnguyen20051/fe-demo:latest
           ports:
             - containerPort: 80
